@@ -94,7 +94,7 @@ app.get("/scraper", function(req, res) {
       var result = {};
       // Add the text and href of every link, and save them as properties of the result object
       result.title = $(element).find("a").find("h3").text();
-      result.link = $(element).find("a").attr("href");
+      result.link = $(element).find("a").find("h3").parent().find("a").attr("href");
       result.summary = $(element).find("div").find("p").text();
       result.saved = false;
 

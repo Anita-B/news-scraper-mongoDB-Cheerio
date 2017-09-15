@@ -4,7 +4,7 @@ $.getJSON("/articles", function(data) {
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     //$("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<a data-id='" + data[i]._id + "' id=\"save-article\" class=\"btn\"'> save article</a></p>");
-    $("#articles").append("<div class=\"article-block\"><div class=\"title-summary\"><div class=\"title\" data-id='" + data[i]._id + "'><a href='" + data[i].link + "' target=\"_blank\">" + data[i].title + "</a></div><div class=\"summary\">" + data[i].link + "</div></div><div class=\"article-btns\"><a data-id='" + data[i]._id + "' id=\"save-article\" class=\"btn\"'>save article</a></div></div>");
+    $("#articles").append("<div class=\"article-block\"><div class=\"title-summary\"><div class=\"title\" data-id='" + data[i]._id + "'><a href='" + data[i].link + "' target=\"_blank\">" + data[i].title + "</a></div><div class=\"summary\">" + data[i].summary + "</div></div><div class=\"article-btns\"><a data-id='" + data[i]._id + "' id=\"save-article\" class=\"btn\"'>save article</a></div></div>");
   }
 });
 

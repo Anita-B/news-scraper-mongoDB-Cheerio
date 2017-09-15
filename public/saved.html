@@ -102,7 +102,7 @@
           for (var i = 0; i < data.length; i++) {
             // Display the apropos information on the page
             //$("#saved-articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<a id=\"delete-article\" class=\"btn\">delete</a><a id=\"notes-article\" class=\"btn\">article notes</a></p>");
-            $("#saved-articles").append("<div class=\"article-block\"><div class=\"title-summary\"><div class=\"title\" data-id='" + data[i]._id + "'><a href='" + data[i].link + "' target=\"_blank\">" + data[i].title + "</a></div><div class=\"summary\">" + data[i].link + "</div></div><div class=\"article-btns\"><a data-id='" + data[i]._id + "' id=\"delete-article\" class=\"btn\">delete article</a><a data-id='" + data[i]._id + "' id=\"note-article\" class=\"btn modal-trigger\" href=\"#modal-notes\">article note</a></div>");
+            $("#saved-articles").append("<div class=\"article-block\"><div class=\"title-summary\"><div class=\"title\" data-id='" + data[i]._id + "'><a href='" + data[i].link + "' target=\"_blank\">" + data[i].title + "</a></div><div class=\"summary\">" + data[i].summary + "</div></div><div class=\"article-btns\"><a data-id='" + data[i]._id + "' id=\"delete-article\" class=\"btn\">delete article</a><a data-id='" + data[i]._id + "' id=\"note-article\" class=\"btn modal-trigger\" href=\"#modal-notes\">article note</a></div>");
           }
           // Log the response
           console.log("the get saved article has been updated!!! ", data);
