@@ -47,10 +47,20 @@ app.use(express.static("public"));
 // Mongoose
 // =============================================================
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/newsscraper");
+//mongoose.connect("mongodb://localhost/newsscraper");
+
+var databaseUri = 'mongodb://localhost/newsscraper';
+
+if (process.env.MONGODB_URI){
+  //this executes if this is being executed in your heroku app
+  mongoose.connect(process.env.MONGODB_URI);
+} else {
+  mongoose.connect(databaseUri);
+}
+
 var db = mongoose.connection;
 
-// Show any mongoose errors
+//Show any mongoose errors
 db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
 });
@@ -59,6 +69,8 @@ db.on("error", function(error) {
 db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
+
+
 
 
 
