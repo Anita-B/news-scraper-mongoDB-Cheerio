@@ -1,0 +1,29 @@
+{
+  "name": "news-scraper-mongodb-cheerio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anita-B/news-scraper-mongoDB-Cheerio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anita-B/news-scraper-mongoDB-Cheerio/issues"
+  },
+  "homepage": "https://github.com/Anita-B/news-scraper-mongoDB-Cheerio#readme",
+  "dependencies": {
+    "body-parser": "^1.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "mongojs": "^2.4.1",
+    "mongoose": "^4.11.11",
+    "morgan": "^1.8.2",
+    "request": "^2.81.0"
+  }
+}

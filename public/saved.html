@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+		<!-- Materialize Reference -->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
+		<!-- Font Awesome Reference -->
+		<link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css"  media="screen,projection"/>
+
+    <!-- fonts.google.com Reference -->
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<link rel="icon" href="/images/favicon.gif" type="image/gif" sizes="16x16">
+
+		<title>News Scraper Mongoose Cheerio</title>
+	</head>
+	<body>
+    <nav class="" role="navigation">
+      <div class="nav-wrapper container">
+				<a id="logo-container" href="/" class="brand-logo"><img src="" alt="" height="63" width="150"></a>
+        <ul class="left hide-on-med-and-down">
+					<li><a class="" href="/">Home</a></li>
+					<li><a id="get-saved-articles" class="" href="/saved">Saved Articles</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+          <li><a id="scrape-new-articles" class="btn" href="/scraper">scrape new articles!</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <!-- <li><a class="modal-trigger" href="#modal-sign-up">Sign Up</a></li> -->
+					<!-- <li><a class="modal-trigger" href="#modal-login">Login</a></li> -->
+					<!-- <li><a class="modal-trigger" href="/login">Login</a></li> -->
+					<!-- <li><a class="modal-trigger" href="/signup">Sign Up</a></li> -->
+					<!-- <li><a class="modal-trigger" href="/logout">Logout</a></li> -->
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></a>
+      </div>
+    </nav>
+
+    <div class="">
+      <img class="responsive-img" src="images/main_img.jpg">
+      <div class="header_text">
+        <h4>Saved Articles</h4>
+      </div>
+    </div>
+
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+
+				<div id="saved-articles"></div>
+
+      </div>
+    </div>
+
+		<!-- Note Modal -->
+		<div id="modal-notes" class="modal">
+		  <div class="modal-content">
+		    <h4>Note!</h4>
+					<!--form-->
+					<form class="col s12">
+					<div class="row modal-row">
+						<div class="input-field col s12">
+		          <!-- <input id="first_last_name" type="text" class="validate"> -->
+		          <label for="note">Note</label>
+							<input type="text" id="note" placeholder="Note">
+		        </div>
+					</div>
+
+					<div class="row modal-row">
+						<div class="input-field col s12">
+							<button type="submit" class="btn waves-effect waves-light" name="action">Save</button>
+						</div>
+					</div>
+
+				</form> <!--end form-->
+		  	</div> <!-- end modal content -->
+		</div> <!-- end sign-up modal -->
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script type="text/javascript" src="/js/signup.js"></script>
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script src="/js/init.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+
+		<script type="text/javascript">
+
+      // this loads the saved articles from the database
+      $.ajax({
+        method: "GET",
+        url: "/get-saved-articles/"
+      })
+        // With that done
+        .done(function(data) {
+          $("#saved-articles").empty();
+          for (var i = 0; i < data.length; i++) {
+            // Display the apropos information on the page
+            //$("#saved-articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "<a id=\"delete-article\" class=\"btn\">delete</a><a id=\"notes-article\" class=\"btn\">article notes</a></p>");
+            $("#saved-articles").append("<div class=\"article-block\"><div class=\"title-summary\"><div class=\"title\" data-id='" + data[i]._id + "'><a href='" + data[i].link + "' target=\"_blank\">" + data[i].title + "</a></div><div class=\"summary\">" + data[i].link + "</div></div><div class=\"article-btns\"><a data-id='" + data[i]._id + "' id=\"delete-article\" class=\"btn\">delete article</a><a data-id='" + data[i]._id + "' id=\"note-article\" class=\"btn modal-trigger\" href=\"#modal-notes\">article note</a></div>");
+          }
+          // Log the response
+          console.log("the get saved article has been updated!!! ", data);
+          // Empty the notes section
+          //$("#notes").empty();
+        });
+
+        // When you click the save-article button
+        $(document).on("click", "#delete-article", function() {
+          // Grab the id associated with the article from the submit button
+          var thisId = $(this).attr("data-id");
+          console.log("thisId:"+thisId)
+          // Run a POST request to change the note, using what's entered in the inputs
+          $.ajax({
+            method: "POST",
+            url: "/delete/" + thisId,
+            data: {
+              //db.places.remove({"country":"Morocco"})
+              // Value taken from title input
+              //title: $("#titleinput").val(),
+              // Value taken from note textarea
+              //body: $("#bodyinput").val()
+              //saved: false
+            }
+          })
+            // With that done
+            .done(function(data) {
+              // Log the response
+              //console.log(data);
+              // Empty the notes section
+              //$("#notes").empty();
+              // $.ajax({
+              //   method: "GET",
+              //   url: "/saved-articles"
+              // }).done(function(data) {
+              //   console.log(data);
+              // }
+              console.log("we are the client", data)
+              location.reload(true);
+            });
+
+          // Also, remove the values entered in the input and textarea for note entry
+          $("#titleinput").val("");
+          $("#bodyinput").val("");
+        });
+
+			// $("#scrape-new-articles").on("click", function(event) {
+			// 		//get("/scraper")
+			// });
+		//need to initialize all modals!!!
+		//$('.modal').modal();
+
+		//on click events for the modals
+		// $("#scrape-new-articles").on("click", function(event) {
+		// 		$('#modal-sign-up').modal('open');
+		// });
+		$("#note-article").on("click", function(event) {
+				$('#modal-notes').modal('open');
+		});
+		</script>
+
+	</body>
+</html>
